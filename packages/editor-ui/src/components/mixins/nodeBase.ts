@@ -294,7 +294,7 @@ export const nodeBase = mixins(
 					return true;
 				},
 				drag: (params: {e: MouseEvent }) => {
-					console.log(params);
+					console.log('drag', params);
 				},
 				stop: (params: { e: MouseEvent }) => {
 					console.log('stop');
