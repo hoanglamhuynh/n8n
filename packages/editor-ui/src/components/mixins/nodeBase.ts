@@ -274,6 +274,7 @@ export const nodeBase = mixins(
 			this.instance.draggable(this.nodeName, {
 				grid: [10, 10],
 				start: (params: { e: MouseEvent }) => {
+					console.log('start', params);
 					if (this.isReadOnly === true) {
 						// Do not allow to move nodes in readOnly mode
 						return false;
@@ -283,15 +284,23 @@ export const nodeBase = mixins(
 						// Only the node which gets dragged directly gets an event, for all others it is
 						// undefined. So check if the currently dragged node is selected and if not clear
 						// the drag-selection.
+						console.log('clearDragSelection');
 						this.instance.clearDragSelection();
 						this.$store.commit('resetSelectedNodes');
 					}
 
+					console.log('committing addActiveAction dragActive');
 					this.$store.commit('addActiveAction', 'dragActive');
 					return true;
 				},
+				drag: (params: {e: MouseEvent }) => {
+					console.log(params);
+				}
 				stop: (params: { e: MouseEvent }) => {
+					console.log('stop',)
+					console.log('isActionActive', this.$store.getters.isActionActive('dragActive'));
 					if (this.$store.getters.isActionActive('dragActive')) {
+						console.log('active!!');
 						const moveNodes = this.$store.getters.getSelectedNodes.slice();
 						const selectedNodeNames = moveNodes.map((node: INodeUi) => node.name);
 						if (!selectedNodeNames.includes(this.data.name)) {
