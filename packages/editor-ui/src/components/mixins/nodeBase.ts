@@ -293,9 +293,6 @@ export const nodeBase = mixins(
 					this.$store.commit('addActiveAction', 'dragActive');
 					return true;
 				},
-				drag: (params: {e: MouseEvent }) => {
-					console.log('drag', params);
-				},
 				stop: (params: { e: MouseEvent }) => {
 					console.log('stop');
 					console.log('isActionActive', this.$store.getters.isActionActive('dragActive'));

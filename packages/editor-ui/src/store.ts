@@ -101,16 +101,17 @@ export const store = new Vuex.Store({
 	mutations: {
 		// Active Actions
 		addActiveAction (state, action: string) {
+			console.log('adding', action);
 			if (!state.activeActions.includes(action)) {
-				state.activeActions.push(action);
+				state.activeActions = state.activeActions.concat([action]);
+				console.log('added', action, JSON.stringify(state.activeActions));
 			}
 		},
 
 		removeActiveAction (state, action: string) {
-			const actionIndex = state.activeActions.indexOf(action);
-			if (actionIndex !== -1) {
-				state.activeActions.splice(actionIndex, 1);
-			}
+			console.log('removing', action, JSON.stringify(state.activeActions));
+			state.activeActions = state.activeActions.filter((active) => active !== action);
+			console.log('removed', action, JSON.stringify(state.activeActions));
 		},
 
 		// Active Executions
